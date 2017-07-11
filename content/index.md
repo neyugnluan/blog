@@ -1,4 +1,4 @@
 ---
-title: Khoa Nguyen Blog
+title: Luan Nguyen Blog
 layout: Homepage
 ---
