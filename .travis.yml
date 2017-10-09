@@ -1,6 +1,28 @@
+language: node_js
+sudo: false
+node_js:
+  - 6
+env:
+  global:
+    # GITHUB_TOKEN
+    - secure: 2aa14a8b8c08cbc23fe208d8d246788e86b04d5f
+    - NPM_CONFIG_PROGRESS="false"
+cache:
+  directories:
+    - node_modules
+before_script:
+  - git submodule foreach git pull origin master
+before_install:
+  - npm prune
+script:
+  - 'npm run lint && npm run build'
+before_deploy:
+  - 'git config --global user.email "gh-pages@localhost"'
+  - 'git config --global user.name "npm gh-pages"'
 deploy:
-  provider: pages
   skip_cleanup: true
+  provider: script
   github_token: 2aa14a8b8c08cbc23fe208d8d246788e86b04d5f
-  on:
+  script: npm run deploy
+  'on':
     branch: master
